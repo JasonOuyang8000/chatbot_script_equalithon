@@ -43,9 +43,16 @@ async function createChatIcon() {
     chatForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
-       sendResponse(chatInput.value);
+       sendResponse(chatInput.value.toLowerCase());
+
+       const message = document.createElement('div')
+       message.innerText = chatInput.value;
+       chatMessages.append(message);
+       message.classList.add('user-message');
 
         chatInput.value = '';
+        
+        chatMessages.scrollTop = chatMessages.scrollHeight;
 
     })
    
@@ -57,6 +64,8 @@ async function createChatIcon() {
     chatContainer.addEventListener('click', () => {
         chatContainer.classList.add('hidden');
        chatBox.classList.remove('hidden');
+
+       chatMessages.scrollTop = chatMessages.scrollHeight;
     });
 
    chatClose.addEventListener('click', () => {
@@ -66,14 +75,14 @@ async function createChatIcon() {
 
 
     // Chat bot Intro Speak
-    await wait(1000);
+   
     await chatBotSpeak(chatMessages,'Hi! I am your personal Startout Chat Bot!'); 
 
   
-    await wait(1000);
+   
     await chatBotSpeak(chatMessages,'I am here to help you with any questions you have with chatbot!');
 
-    await wait(1000);
+   
     chatBotSpeak(chatMessages,'Before we get started, Please select what you need help with:');
     chatBotSpeak(chatMessages,null,['Becoming an Investor? ', 'Getting Support as a founder?', 'Becoming a mentor?', 'More Options']);
   
@@ -93,13 +102,16 @@ let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 async function chatBotSpeak(chatMessages,text = null,links = null, alink = false) {
   
+   
 
 
     let messageDiv = null;
-    const typingAnimation = createLoader();
+    const typingAnimation = createLoader(); 
     typingAnimation.setAttribute('id','replace');
 
     chatMessages.append(typingAnimation);
+
+    chatMessages.scrollTop = chatMessages.scrollHeight;
 
     if (alink) {
         messageDiv = document.createElement('a');
@@ -133,7 +145,7 @@ async function chatBotSpeak(chatMessages,text = null,links = null, alink = false
     }
 
 
-    await wait(1000);
+    await wait(1500);
     document.querySelector('#replace').remove();
     chatMessages.append(messageDiv);
   
@@ -142,8 +154,8 @@ async function chatBotSpeak(chatMessages,text = null,links = null, alink = false
 
 
 
-   
-   
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
 
 }
 

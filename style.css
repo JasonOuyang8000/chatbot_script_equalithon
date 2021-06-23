@@ -73,6 +73,7 @@ body {
     height:400px;
     background: white;
     padding: 15px;
+   
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -113,6 +114,8 @@ body {
 .message-div {
     display: flex;
     align-items: center;
+    width: 100%;
+    
 }
 
 .message-div img {
@@ -131,6 +134,16 @@ body {
 
 .message-div a {
     text-decoration: none;
+}
+
+
+.user-message {
+    background: rgb(160, 160, 245);
+    padding: 10px 20px;
+    border-radius: 10px;
+    align-self: flex-end;
+
+    text-align: left;
 }
 
 
@@ -203,8 +216,8 @@ body {
   width: 58px;
   height: 58px;
   display: inline-block;
-  overflow: hidden;
-
+  margin-bottom: 20px;
+  
 }
 .typing {
   width: 100%;
@@ -213,5 +226,6 @@ body {
   transform: translateZ(0) scale(0.58);
   backface-visibility: hidden;
   transform-origin: 0 0; /* see note above */
+  margin-bottom: 20px;
 }
 .typing div { box-sizing: content-box; }
