@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+body {
+    min-height: 100vh;
+}
+
+
+.chat-container {
+    cursor: pointer;
+    position: fixed;
+    right: 30px;
+    bottom: 20px;
+    height: 60px;
+    width: 75px;
+    background: #1ca9d0;
+
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 1px 1px 1px 1px rgba(75, 74, 74, 0.363);
+
+}
+
+
+#chat-btn {
+    width: 40px;
+    height: 28px;
+    background: white;
+    border-radius: 4px;
+    position: relative;
+ 
+  }
+#chat-btn:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 0;
+      height: 0;
+      right: 10px;
+      bottom: -10px;
+      border-left: 10px solid transparent;
+      border-right: 2px solid transparent;
+      border-top: 10px solid #edfdfb;
+}
+
+.hidden {
+    display: none;
+}
+
+.chat-box {
+    box-sizing: border-box;
+
+    overflow: hidden;
+    width: 350px;
+
+    position: fixed;
+    right: 30px;
+    bottom: 20px;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    font-family: 'Lato', sans-serif;
+
+
+    border-radius: 10px;
+    /* background: #3c8599ea; */
+
+   
+}
+
+.chat-messages {
+   
+    border-bottom: 1px solid rgba(128, 128, 128, 0.432);
+ 
+    height:400px;
+    background: white;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.chat-btn-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 0;
+    padding: 10px 20px;
+    background: transparent;
+    cursor: pointer;
+    color: white;
+  
+}
+
+.chat-input {
+  
+    margin: 0;
+    padding: 20px 10px;
+    border: unset;
+  
+    display: block;
+    width: calc(100% - 20px);
+    font-size: 16px;
+    outline: none;
+    border-radius: 10px;
+}
+
+.chat-top {
+    background: #1ca9d0;
+    height: 35px;
+  
+}
+
+.message-div {
+    display: flex;
+    align-items: center;
+}
+
+.message-div img {
+    width: 48px;
+    height: 48px;
+    margin-right: 15px;
+}
+
+.message-div p {
+    width: 70%;
+    line-height: 150%;
+    background: rgb(190, 235, 247);
+    padding: 10px 20px;
+    border-radius: 15px;
+}
+
+
+.link-div {
+    text-align: center;
+  
+    padding: 10px;
+}
+
+.link-div div {
+    padding: 10px 25px;
+    border: 1px solid lightgray;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+@keyframes typing {
+   0% { transform: translate(6px,40px) scale(0); }
+  25% { transform: translate(6px,40px) scale(0); }
+  50% { transform: translate(6px,40px) scale(1); }
+  75% { transform: translate(40px,40px) scale(1); }
+ 100% { transform: translate(74px,40px) scale(1); }
+}
+@keyframes typing-r {
+   0% { transform: translate(74px,40px) scale(1); }
+ 100% { transform: translate(74px,40px) scale(0); }
+}
+@keyframes typing-c {
+   0% { background: #0a0a0a }
+  25% { background: #fffaf4 }
+  50% { background: #ffffff }
+  75% { background: #28292f }
+ 100% { background: #0a0a0a }
+}
+.typing div {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  transform: translate(40px,40px) scale(1);
+  background: #0a0a0a;
+  animation: typing 2.6315789473684212s infinite cubic-bezier(0,0.5,0.5,1);
+}
+.typing div:nth-child(1) {
+  background: #28292f;
+  transform: translate(74px,40px) scale(1);
+  animation: typing-r 0.6578947368421053s infinite cubic-bezier(0,0.5,0.5,1), typing-c 2.6315789473684212s infinite step-start;
+}.typing div:nth-child(2) {
+  animation-delay: -0.6578947368421053s;
+  background: #0a0a0a;
+}.typing div:nth-child(3) {
+  animation-delay: -1.3157894736842106s;
+  background: #28292f;
+}.typing div:nth-child(4) {
+  animation-delay: -1.9736842105263157s;
+  background: #ffffff;
+}.typing div:nth-child(5) {
+  animation-delay: -2.6315789473684212s;
+  background: #fffaf4;
+}
+.loadingio-spinner-ellipsis-3ptd39fpn5s {
+  width: 58px;
+  height: 58px;
+  display: inline-block;
+  overflow: hidden;
+
+}
+.typing {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(0.58);
+  backface-visibility: hidden;
+  transform-origin: 0 0; /* see note above */
+}
+.typing div { box-sizing: content-box; }
