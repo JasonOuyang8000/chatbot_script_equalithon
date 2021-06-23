@@ -20,6 +20,7 @@ async function createChatIcon() {
 
     const chatMessages = document.createElement('div');
     const chatInput = document.createElement('input');
+    const chatForm = document.createElement('form');
     const chatTop = document.createElement('div');
 
     const chatClose = document.createElement('button');
@@ -30,13 +31,24 @@ async function createChatIcon() {
     chatClose.classList.add('chat-btn-close');
 
 
-
+    
     chatInput.setAttribute('placeholder', "Write a message...")
 
     chatClose.innerText = 'X'
     chatTop.append(chatClose);
-    chatBox.append(chatTop,chatMessages,chatInput);
+    chatForm.append(chatInput);
+    chatBox.append(chatTop,chatMessages,chatForm);
 
+
+    chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+       sendResponse(chatInput.value);
+
+        chatInput.value = '';
+
+    })
+   
     body.append(chatContainer,chatBox); 
 
 
@@ -66,7 +78,8 @@ async function createChatIcon() {
     chatBotSpeak(chatMessages,null,['Becoming an Investor? ', 'Getting Support as a founder?', 'Becoming a mentor?', 'More Options']);
   
    
-
+    
+  
   
 }
 
@@ -78,12 +91,24 @@ function typing(chatMessages) {
 let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 
-async function chatBotSpeak(chatMessages,text = null,links = null) {
-    const messageDiv = document.createElement('div');
+async function chatBotSpeak(chatMessages,text = null,links = null, alink = false) {
+  
+
+
+    let messageDiv = null;
     const typingAnimation = createLoader();
     typingAnimation.setAttribute('id','replace');
 
     chatMessages.append(typingAnimation);
+
+    if (alink) {
+        messageDiv = document.createElement('a');
+    }
+
+    else {
+        messageDiv = document.createElement('div');
+    }
+
 
     if (text !== null) {
         messageDiv.classList.add('message-div');
@@ -91,6 +116,13 @@ async function chatBotSpeak(chatMessages,text = null,links = null) {
         chatIcon.src = 'https://img.icons8.com/fluent/48/000000/music-robot.png';
         const message = document.createElement('p');
         message.innerText = text;
+
+        if (alink) {
+            messageDiv.href = text;
+            messageDiv.setAttribute('target', '_blank');
+            message.innerText = 'Here is your link.';
+        }
+        
         messageDiv.append(chatIcon,message);
     }
 
@@ -98,7 +130,6 @@ async function chatBotSpeak(chatMessages,text = null,links = null) {
         messageDiv.classList.add('link-div');
 
         createChatLinks(links,messageDiv);
-
     }
 
 
@@ -108,7 +139,6 @@ async function chatBotSpeak(chatMessages,text = null,links = null) {
   
 
    
-    
 
 
 
@@ -119,6 +149,19 @@ async function chatBotSpeak(chatMessages,text = null,links = null) {
 
 
 function createChatLinks(links,div) {
+    // if (alink) {
+    //     links.forEach(link => {
+    //         const linkDiv = document.createElement('div')
+    //         const a = document.createElement('a')
+    //         a.href = link;
+    //         a.innerText = link;
+    //         linkDiv.append(a)
+    //         div.append(linkDiv);
+    //     })
+    //     return;
+    // }
+
+
     links.forEach(link => {
         const linkDiv = document.createElement('div')
 
@@ -128,11 +171,24 @@ function createChatLinks(links,div) {
     })
 }
 
+async function sendResponse(text) {
 
-function initateWelcomeMessage() {
+    const response = await axios.post('http://localhost:5000/userportal',{
+        input: text
+    });
 
+    const chatMessages = document.querySelector('.chat-messages');
+    if (response.data.link) {
+        chatBotSpeak(chatMessages,response.data.link,null, true)
+        chatBotSpeak(chatMessages,response.data.message)
+    }
+
+    else {
+        chatBotSpeak(chatMessages,response.data.message)
+    }
+
+  
 }
-
 
 function createLoader() {
     const div = document.createElement('div');

@@ -129,6 +129,10 @@ body {
     border-radius: 15px;
 }
 
+.message-div a {
+    text-decoration: none;
+}
+
 
 .link-div {
     text-align: center;
