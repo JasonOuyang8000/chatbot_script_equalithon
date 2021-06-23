@@ -180,18 +180,35 @@ function createChatLinks(links,div) {
 
         linkDiv.innerText = link;
         linkDiv.addEventListener('click', ()=>{
+            const chatMessages = document.querySelector('.chat-messages');
+            const message = document.createElement('div')
+            message.classList.add('user-message');
+     
+       
             if (link === 'Becoming an Investor?'){
+                let value = "investor";
                 sendResponse("investor")
+                message.innerText = value;
             }
             else if (link ==='Getting Support as a founder?'){
+                let value = "founder";
                 sendResponse('founder')
+                message.innerText = value;
             }
             else if (link==='Becoming a mentor?'){
+                let value = "mentor";
                 sendResponse("mentor")
+                message.innerText = value;
             }
             else if(link==='More Options'){
+                let value = "options";
                 sendResponse("options")
+                message.innerText = value;
             } 
+
+            chatMessages.append(message);
+       
+
         })
         
         div.append(linkDiv);
