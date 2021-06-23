@@ -84,7 +84,7 @@ async function createChatIcon() {
 
    
     chatBotSpeak(chatMessages,'Before we get started, Please select what you need help with:');
-    chatBotSpeak(chatMessages,null,['Becoming an Investor? ', 'Getting Support as a founder?', 'Becoming a mentor?', 'More Options']);
+    chatBotSpeak(chatMessages,null,['Becoming an Investor?', 'Getting Support as a founder?', 'Becoming a mentor?', 'More Options']);
   
    
     
@@ -132,7 +132,7 @@ async function chatBotSpeak(chatMessages,text = null,links = null, alink = false
         if (alink) {
             messageDiv.href = text;
             messageDiv.setAttribute('target', '_blank');
-            message.innerText = 'Here is your link.';
+            message.innerText = 'Click here for more details.';
         }
         
         messageDiv.append(chatIcon,message);
@@ -172,13 +172,28 @@ function createChatLinks(links,div) {
     //     })
     //     return;
     // }
+      
 
 
     links.forEach(link => {
         const linkDiv = document.createElement('div')
 
         linkDiv.innerText = link;
-
+        linkDiv.addEventListener('click', ()=>{
+            if (link === 'Becoming an Investor?'){
+                sendResponse("investor")
+            }
+            else if (link ==='Getting Support as a founder?'){
+                sendResponse('founder')
+            }
+            else if (link==='Becoming a mentor?'){
+                sendResponse("mentor")
+            }
+            else if(link==='More Options'){
+                sendResponse("options")
+            } 
+        })
+        
         div.append(linkDiv);
     })
 }
