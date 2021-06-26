@@ -115,7 +115,7 @@ body {
     display: flex;
     align-items: center;
     width: 100%;
-    
+    margin-bottom: 20px;
 }
 
 .message-div img {
@@ -229,3 +229,8 @@ body {
   margin-bottom: 20px;
 }
 .typing div { box-sizing: content-box; }
+
+
+.user-message {
+  margin-bottom: 20px;
+}

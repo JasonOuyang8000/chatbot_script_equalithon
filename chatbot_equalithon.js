@@ -42,17 +42,17 @@ async function createChatIcon() {
 
     chatForm.addEventListener('submit', (e) => {
         e.preventDefault();
-
+   
        sendResponse(chatInput.value.toLowerCase());
 
        const message = document.createElement('div')
        message.innerText = chatInput.value;
        chatMessages.append(message);
        message.classList.add('user-message');
-
+       chatMessages.scrollTop = chatMessages.scrollHeight;
         chatInput.value = '';
         
-        chatMessages.scrollTop = chatMessages.scrollHeight;
+       
 
     })
    
@@ -92,11 +92,7 @@ async function createChatIcon() {
   
 }
 
-function typing(chatMessages) {
-   
 
-
-}
 let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 
@@ -132,7 +128,9 @@ async function chatBotSpeak(chatMessages,text = null,links = null, alink = false
         if (alink) {
             messageDiv.href = text;
             messageDiv.setAttribute('target', '_blank');
-            message.innerText = 'Click here for more details.';
+          
+
+            message.innerText = text;
         }
         
         messageDiv.append(chatIcon,message);
@@ -145,7 +143,7 @@ async function chatBotSpeak(chatMessages,text = null,links = null, alink = false
     }
 
 
-    await wait(1500);
+    await wait(1200);
     document.querySelector('#replace').remove();
     chatMessages.append(messageDiv);
   
@@ -183,7 +181,7 @@ function createChatLinks(links,div) {
             const chatMessages = document.querySelector('.chat-messages');
             const message = document.createElement('div')
             message.classList.add('user-message');
-     
+          
        
             if (link === 'Becoming an Investor?'){
                 let value = "investor";
@@ -207,7 +205,7 @@ function createChatLinks(links,div) {
             } 
 
             chatMessages.append(message);
-       
+            chatMessages.scrollTop = chatMessages.scrollHeight;
 
         })
         
@@ -217,14 +215,21 @@ function createChatLinks(links,div) {
 
 async function sendResponse(text) {
 
+
     const response = await axios.post('http://localhost:5000/userportal',{
         input: text
     });
 
     const chatMessages = document.querySelector('.chat-messages');
     if (response.data.link) {
-        chatBotSpeak(chatMessages,response.data.link,null, true)
-        chatBotSpeak(chatMessages,response.data.message)
+        
+        await wait(500);
+        await chatBotSpeak(chatMessages,`Here is your link for ${text}`);
+        
+        await wait(500);
+        await chatBotSpeak(chatMessages,response.data.link,null, true);
+        await wait(500);
+        await chatBotSpeak(chatMessages,response.data.message);
     }
 
     else {
