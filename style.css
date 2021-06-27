@@ -162,7 +162,17 @@ body {
 }
 
 
+.chat-form {
+  display: flex;
+  
+}
 
+.chat-form button {
+    border: 0;
+    width: 100px;
+    background: #1ca9d0;
+    color: #ffffff;
+}
 
 
 
@@ -233,4 +243,11 @@ body {
 
 .user-message {
   margin-bottom: 20px;
+}
+
+@media screen and (max-width: 450px) {
+  .chat-box {
+    width: 90vw;
+    right: 15px;
+  }
 }

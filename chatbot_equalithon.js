@@ -22,21 +22,22 @@ async function createChatIcon() {
     const chatInput = document.createElement('input');
     const chatForm = document.createElement('form');
     const chatTop = document.createElement('div');
-
+    const chatSend = document.createElement('button')
     const chatClose = document.createElement('button');
 
     chatTop.classList.add('chat-top');
     chatInput.classList.add('chat-input');
     chatMessages.classList.add('chat-messages');
     chatClose.classList.add('chat-btn-close');
-
+    chatForm.classList.add('chat-form')
 
     
     chatInput.setAttribute('placeholder', "Write a message...")
-
+    
+    chatSend.innerText= 'Send'
     chatClose.innerText = 'X'
     chatTop.append(chatClose);
-    chatForm.append(chatInput);
+    chatForm.append(chatInput,chatSend);
     chatBox.append(chatTop,chatMessages,chatForm);
 
 
